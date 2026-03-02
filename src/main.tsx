@@ -20,6 +20,10 @@ import { GuardrailsPage } from '@/pages/GuardrailsPage';
 import { RetrievalPage } from '@/pages/RetrievalPage';
 import { EvaluationPage } from '@/pages/EvaluationPage';
 import { AboutPage } from '@/pages/AboutPage';
+import { BuildBuyPage } from '@/pages/BuildBuyPage';
+import { OptimizationPage } from '@/pages/OptimizationPage';
+import { ExperimentationPage } from '@/pages/ExperimentationPage';
+import { FairnessPage } from '@/pages/FairnessPage';
 const queryClient = new QueryClient();
 const router = createBrowserRouter([
   {
@@ -50,6 +54,26 @@ const router = createBrowserRouter([
   {
     path: "/evaluation",
     element: <><RouteAnnouncer /><EvaluationPage /></>,
+    errorElement: <RouteErrorBoundary />,
+  },
+  {
+    path: "/build-buy",
+    element: <><RouteAnnouncer /><BuildBuyPage /></>,
+    errorElement: <RouteErrorBoundary />,
+  },
+  {
+    path: "/optimization",
+    element: <><RouteAnnouncer /><OptimizationPage /></>,
+    errorElement: <RouteErrorBoundary />,
+  },
+  {
+    path: "/experiments",
+    element: <><RouteAnnouncer /><ExperimentationPage /></>,
+    errorElement: <RouteErrorBoundary />,
+  },
+  {
+    path: "/fairness",
+    element: <><RouteAnnouncer /><FairnessPage /></>,
     errorElement: <RouteErrorBoundary />,
   },
   {

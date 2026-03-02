@@ -7,6 +7,10 @@
     "evaluation": "Evaluación",
     "governance": "Gobernanza",
     "about": "Acerca de",
+    "buildBuy": "Construir vs Comprar",
+    "optimization": "Optimización LLM",
+    "experiments": "Experimentos",
+    "fairness": "IA Responsable",
     "documentation": "Documentación",
     "settings": "Configuración"
   },
@@ -113,11 +117,57 @@
   "about": {
     "title": "Sobre el Laboratorio",
     "subtitle": "Veritas AI Lab es un prototipo diseñado independientemente de un plano de control de IA empresarial.",
+    "vision": {
+      "title": "Visión Técnica",
+      "reliability": "Confiabilidad Sistémica",
+      "scalability": "Escalabilidad Elástica",
+      "governance": "Gobernanza Rigurosa",
+      "cost": "Eficiencia de Costos"
+    },
+    "roadmap": {
+      "title": "Hoja de Ruta Estratégica",
+      "phase1": "Despliegue Multi-Región",
+      "phase2": "Enrutamiento Inteligente",
+      "phase3": "Automatización CI/CD LLM"
+    },
     "visionTitle": "Visión Arquitectónica",
     "visionDesc": "La plataforma proporciona un plano para gestionar la naturaleza 'impredecible' de los modelos de lenguaje. Al centralizar el flujo de solicitudes, las empresas mantienen una supervisión rigurosa.",
     "capabilities": "Capacidades Clave",
     "version": "Versión del Prototipo 1.2.0-Estable",
     "footer": "Este entorno de laboratorio utiliza datos simulados de alta fidelidad para fines de demostración."
+  },
+  "buildBuy": {
+    "title": "Análisis Estratégico",
+    "subtitle": "Matriz de decisión Construir vs. Comprar para infraestructura de IA financiera.",
+    "recommendation": "Recomendación Ejecutiva",
+    "options": {
+      "name": "Proveedor",
+      "latency": "Latencia",
+      "cost": "Costo Est.",
+      "risk": "Perfil de Riesgo"
+    }
+  },
+  "optimization": {
+    "title": "Optimización LLM",
+    "subtitle": "Simulación de rendimiento para despliegues de grado de producción.",
+    "params": "Parámetros del Modelo",
+    "results": "Rendimiento Proyectado",
+    "tps": "Tokens por Segundo",
+    "monthly": "Costo Mensual Estimado"
+  },
+  "experiments": {
+    "title": "Experimentación A/B",
+    "subtitle": "Simulación de tráfico y comparativa de precisión.",
+    "delta": "Diferencial de Rendimiento",
+    "accuracy": "Precisión ∆",
+    "latency": "Latencia ∆"
+  },
+  "fairness": {
+    "title": "IA Responsable",
+    "subtitle": "Detección de sesgos y paridad demográfica en servicios regulados.",
+    "parity": "Paridad Demográfica",
+    "disparate": "Ratio de Impacto Dispar",
+    "threshold": "Umbral de Equidad (80%)"
   },
   "common": {
     "skip": "Saltar al contenido principal",

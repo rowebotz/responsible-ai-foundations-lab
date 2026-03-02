@@ -9,7 +9,11 @@ import {
   Gavel,
   Settings,
   Info,
-  LayoutDashboard
+  LayoutDashboard,
+  Scale,
+  Gauge,
+  TestTube,
+  ShieldAlert
 } from "lucide-react";
 import {
   Sidebar,
@@ -30,14 +34,19 @@ export function AppSidebar(): JSX.Element {
   const location = useLocation();
   const currentLang = useLanguage(s => s.current);
   const t = currentLang === 'en' ? en : es;
-  const navItems = [
+  const coreModules = [
     { title: t.nav.overview, icon: Home, url: "/" },
     { title: t.nav.observability, icon: Activity, url: "/observability" },
     { title: t.nav.guardrails, icon: ShieldCheck, url: "/guardrails" },
     { title: t.nav.retrieval, icon: Database, url: "/retrieval" },
     { title: t.nav.evaluation, icon: Zap, url: "/evaluation" },
     { title: t.nav.governance, icon: Gavel, url: "/governance" },
-    { title: t.nav.about, icon: Info, url: "/about" },
+  ];
+  const strategicPlanning = [
+    { title: t.nav.buildBuy, icon: Scale, url: "/build-buy" },
+    { title: t.nav.optimization, icon: Gauge, url: "/optimization" },
+    { title: t.nav.experiments, icon: TestTube, url: "/experiments" },
+    { title: t.nav.fairness, icon: ShieldAlert, url: "/fairness" },
   ];
   return (
     <Sidebar variant="sidebar" collapsible="icon">
@@ -54,17 +63,16 @@ export function AppSidebar(): JSX.Element {
       </SidebarHeader>
       <SidebarContent>
         <SidebarGroup>
-          <SidebarGroupLabel className="px-2 mb-2 text-xs font-semibold uppercase tracking-widest text-muted-foreground/70 group-data-[collapsible=icon]:hidden">
-            Main Modules
+          <SidebarGroupLabel className="px-2 mb-2 text-[10px] font-bold uppercase tracking-widest text-muted-foreground/60 group-data-[collapsible=icon]:hidden">
+            Operations & Trust
           </SidebarGroupLabel>
           <SidebarMenu>
-            {navItems.map((item) => (
+            {coreModules.map((item) => (
               <SidebarMenuItem key={item.url}>
                 <SidebarMenuButton
                   asChild
                   isActive={location.pathname === item.url}
                   tooltip={item.title}
-                  className="transition-all duration-200"
                 >
                   <Link to={item.url}>
                     <item.icon className="size-4" />
@@ -75,13 +83,37 @@ export function AppSidebar(): JSX.Element {
             ))}
           </SidebarMenu>
         </SidebarGroup>
-        <SidebarSeparator className="my-4 opacity-50" />
+        <SidebarSeparator className="my-2 opacity-50" />
+        <SidebarGroup>
+          <SidebarGroupLabel className="px-2 mb-2 text-[10px] font-bold uppercase tracking-widest text-muted-foreground/60 group-data-[collapsible=icon]:hidden">
+            Strategic Planning
+          </SidebarGroupLabel>
+          <SidebarMenu>
+            {strategicPlanning.map((item) => (
+              <SidebarMenuItem key={item.url}>
+                <SidebarMenuButton
+                  asChild
+                  isActive={location.pathname === item.url}
+                  tooltip={item.title}
+                >
+                  <Link to={item.url}>
+                    <item.icon className="size-4" />
+                    <span className="font-medium">{item.title}</span>
+                  </Link>
+                </SidebarMenuButton>
+              </SidebarMenuItem>
+            ))}
+          </SidebarMenu>
+        </SidebarGroup>
+        <SidebarSeparator className="my-2 opacity-50" />
         <SidebarGroup className="mt-auto">
           <SidebarMenu>
             <SidebarMenuItem>
-              <SidebarMenuButton tooltip={t.nav.documentation}>
-                <Database className="size-4 opacity-50" />
-                <span className="font-medium">{t.nav.documentation}</span>
+              <SidebarMenuButton asChild tooltip={t.nav.about}>
+                <Link to="/about">
+                  <Info className="size-4" />
+                  <span className="font-medium">{t.nav.about}</span>
+                </Link>
               </SidebarMenuButton>
             </SidebarMenuItem>
             <SidebarMenuItem>

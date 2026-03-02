@@ -7,6 +7,10 @@
     "evaluation": "Evaluation",
     "governance": "Governance",
     "about": "About",
+    "buildBuy": "Build vs Buy",
+    "optimization": "LLM Optimization",
+    "experiments": "Experiments",
+    "fairness": "Responsible AI",
     "documentation": "Documentation",
     "settings": "Settings"
   },
@@ -113,11 +117,57 @@
   "about": {
     "title": "About the Lab",
     "subtitle": "Veritas AI Lab is an independently engineered prototype of an enterprise-grade AI control plane, designed to exemplify scalable systems thinking for LLM deployments.",
+    "vision": {
+      "title": "Technical Vision",
+      "reliability": "Systemic Reliability",
+      "scalability": "Elastic Scalability",
+      "governance": "Rigorous Governance",
+      "cost": "Cost Efficiency"
+    },
+    "roadmap": {
+      "title": "Strategic Roadmap",
+      "phase1": "Multi-Region Deployment",
+      "phase2": "Model-Aware Routing",
+      "phase3": "LLM CI/CD Automation"
+    },
     "visionTitle": "Architectural Vision",
     "visionDesc": "The platform provides a blueprint for managing the 'unpredictable' nature of large language models. By centralizing the request flow, enterprises can maintain rigorous oversight without sacrificing agility.",
     "capabilities": "Key Capabilities",
     "version": "Prototype Version 1.2.0-Stable",
     "footer": "This laboratory environment uses high-fidelity mock data and client-side calculations for demonstration purposes."
+  },
+  "buildBuy": {
+    "title": "Strategic Analysis",
+    "subtitle": "Build vs. Buy decision matrix for financial AI infrastructure.",
+    "recommendation": "Executive Recommendation",
+    "options": {
+      "name": "Provider",
+      "latency": "Latency",
+      "cost": "Est. Cost",
+      "risk": "Risk Profile"
+    }
+  },
+  "optimization": {
+    "title": "LLM Optimization",
+    "subtitle": "Performance simulation for production-grade deployments.",
+    "params": "Model Parameters",
+    "results": "Projected Performance",
+    "tps": "Tokens Per Second",
+    "monthly": "Estimated Monthly Cost"
+  },
+  "experiments": {
+    "title": "A/B Experimentation",
+    "subtitle": "Head-to-head traffic simulation and accuracy benchmarking.",
+    "delta": "Performance Delta",
+    "accuracy": "Accuracy ∆",
+    "latency": "Latency ∆"
+  },
+  "fairness": {
+    "title": "Responsible AI",
+    "subtitle": "Bias detection and demographic parity for regulated services.",
+    "parity": "Demographic Parity",
+    "disparate": "Disparate Impact Ratio",
+    "threshold": "Fairness Threshold (80%)"
   },
   "common": {
     "skip": "Skip to main content",
