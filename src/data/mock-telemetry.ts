@@ -22,7 +22,7 @@ export const recentTraces: Trace[] = [
     latency: 1240,
     tokens: 450,
     status: "success",
-    input: "Analyze the quarterly risk report for JP Morgan Chase.",
+    input: "Analyze the quarterly risk report for Capital One.",
     output: "Based on the Q1 reports, the primary risk vectors include interest rate volatility and commercial real estate exposure...",
     guardrailTriggers: [],
   },

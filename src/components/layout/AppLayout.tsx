@@ -57,7 +57,6 @@ export function AppLayout({ children, container = false, className, contentClass
           </div>
         </header>
         <main id="main-content" className={cn("flex-1 outline-none", contentClassName)} tabIndex={-1} role="main">
-          <div aria-live="polite" className="sr-only" id="route-announcer"></div>
           {container ? (
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16">
               {children}
