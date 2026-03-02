@@ -2,7 +2,7 @@ import '@/lib/errorReporter';
 import { enableMapSet } from "immer";
 enableMapSet();
 import React, { StrictMode } from 'react'
-import { createRoot, type Root } from 'react-dom/client'
+import { createRoot } from 'react-dom/client'
 import {
   createBrowserRouter,
   RouterProvider,
@@ -24,7 +24,14 @@ import { BuildBuyPage } from '@/pages/BuildBuyPage';
 import { OptimizationPage } from '@/pages/OptimizationPage';
 import { ExperimentationPage } from '@/pages/ExperimentationPage';
 import { FairnessPage } from '@/pages/FairnessPage';
-const queryClient = new QueryClient();
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      retry: false,
+      refetchOnWindowFocus: false,
+    },
+  },
+});
 const router = createBrowserRouter([
   {
     path: "/",
@@ -82,17 +89,10 @@ const router = createBrowserRouter([
     errorElement: <RouteErrorBoundary />,
   },
 ]);
-declare global {
-  interface Window {
-    __veritas_root__?: Root;
-  }
-}
 const container = document.getElementById('root');
 if (container) {
-  if (!window.__veritas_root__) {
-    window.__veritas_root__ = createRoot(container);
-  }
-  window.__veritas_root__.render(
+  const root = createRoot(container);
+  root.render(
     <StrictMode>
       <QueryClientProvider client={queryClient}>
         <ErrorBoundary>

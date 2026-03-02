@@ -21,7 +21,7 @@ export function AboutPage() {
     { phase: "Q1 2027", title: t.about.roadmap.phase3, desc: "Unified pipeline for model fine-tuning and safety alignment.", icon: GitBranch },
   ];
   return (
-    <AppLayout container>
+    <AppLayout container={false}>
       <SEO title={`About | Veritas AI Lab`} />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-10 lg:py-12">
         <div className="max-w-3xl space-y-16">
