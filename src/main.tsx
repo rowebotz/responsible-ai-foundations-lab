@@ -1,11 +1,12 @@
 import '@/lib/errorReporter';
 import { enableMapSet } from "immer";
 enableMapSet();
-import { StrictMode } from 'react'
+import React, { StrictMode, useEffect } from 'react'
 import { createRoot } from 'react-dom/client'
 import {
   createBrowserRouter,
   RouterProvider,
+  useLocation,
 } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ErrorBoundary } from '@/components/ErrorBoundary';
@@ -20,41 +21,53 @@ import { RetrievalPage } from '@/pages/RetrievalPage';
 import { EvaluationPage } from '@/pages/EvaluationPage';
 import { AboutPage } from '@/pages/AboutPage';
 const queryClient = new QueryClient();
-// Route Configuration
+function RouteAnnouncer() {
+  const location = useLocation();
+  useEffect(() => {
+    const announcer = document.getElementById('route-announcer');
+    if (announcer) {
+      const pageName = location.pathname === '/' 
+        ? 'Overview' 
+        : location.pathname.substring(1).charAt(0).toUpperCase() + location.pathname.substring(2);
+      announcer.textContent = `Navigated to ${pageName} page`;
+    }
+  }, [location]);
+  return null;
+}
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <OverviewPage />,
+    element: <><RouteAnnouncer /><OverviewPage /></>,
     errorElement: <RouteErrorBoundary />,
   },
   {
     path: "/observability",
-    element: <ObservabilityPage />,
+    element: <><RouteAnnouncer /><ObservabilityPage /></>,
     errorElement: <RouteErrorBoundary />,
   },
   {
     path: "/governance",
-    element: <GovernancePage />,
+    element: <><RouteAnnouncer /><GovernancePage /></>,
     errorElement: <RouteErrorBoundary />,
   },
   {
     path: "/guardrails",
-    element: <GuardrailsPage />,
+    element: <><RouteAnnouncer /><GuardrailsPage /></>,
     errorElement: <RouteErrorBoundary />,
   },
   {
     path: "/retrieval",
-    element: <RetrievalPage />,
+    element: <><RouteAnnouncer /><RetrievalPage /></>,
     errorElement: <RouteErrorBoundary />,
   },
   {
     path: "/evaluation",
-    element: <EvaluationPage />,
+    element: <><RouteAnnouncer /><EvaluationPage /></>,
     errorElement: <RouteErrorBoundary />,
   },
   {
     path: "/about",
-    element: <AboutPage />,
+    element: <><RouteAnnouncer /><AboutPage /></>,
     errorElement: <RouteErrorBoundary />,
   },
 ]);
