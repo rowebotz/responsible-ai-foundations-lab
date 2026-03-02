@@ -15,6 +15,9 @@ import '@/index.css'
 import { OverviewPage } from '@/pages/OverviewPage';
 import { ObservabilityPage } from '@/pages/ObservabilityPage';
 import { GovernancePage } from '@/pages/GovernancePage';
+import { GuardrailsPage } from '@/pages/GuardrailsPage';
+import { RetrievalPage } from '@/pages/RetrievalPage';
+import { EvaluationPage } from '@/pages/EvaluationPage';
 const queryClient = new QueryClient();
 // Route Configuration
 const router = createBrowserRouter([
@@ -33,20 +36,19 @@ const router = createBrowserRouter([
     element: <GovernancePage />,
     errorElement: <RouteErrorBoundary />,
   },
-  // Placeholders for future phases
   {
     path: "/guardrails",
-    element: <div className="p-10">Guardrails Module - Coming Soon</div>,
+    element: <GuardrailsPage />,
     errorElement: <RouteErrorBoundary />,
   },
   {
     path: "/retrieval",
-    element: <div className="p-10">Retrieval (RAG) Module - Coming Soon</div>,
+    element: <RetrievalPage />,
     errorElement: <RouteErrorBoundary />,
   },
   {
     path: "/evaluation",
-    element: <div className="p-10">Evaluation Module - Coming Soon</div>,
+    element: <EvaluationPage />,
     errorElement: <RouteErrorBoundary />,
   },
 ]);
