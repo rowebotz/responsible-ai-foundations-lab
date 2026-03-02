@@ -1,6 +1,6 @@
 # Veritas AI Lab
 
-[cloudflarebutton]
+[![Deploy to Cloudflare](https://deploy.workers.cloudflare.com/button)](https://deploy.workers.cloudflare.com/?url=https://github.com/rowebotz/responsible-ai-foundations-lab)
 
 A production-ready full-stack web application built on Cloudflare Workers and Pages. Featuring a modern React frontend with shadcn/ui, Tailwind CSS, and a Hono-powered API backend. Designed for high performance, scalability, and developer experience.
 
@@ -65,7 +65,7 @@ Outputs optimized assets to `dist/` for Cloudflare Pages.
 
 ### Deploy
 
-[cloudflarebutton]
+[![Deploy to Cloudflare](https://deploy.workers.cloudflare.com/button)](https://deploy.workers.cloudflare.com/?url=https://github.com/rowebotz/responsible-ai-foundations-lab)
 
 Deploy to Cloudflare:
 ```bash
