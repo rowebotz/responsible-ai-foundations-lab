@@ -34,7 +34,11 @@ export function GovernancePage() {
                 </div>
                 <CardTitle className="text-lg font-bold flex items-center gap-2">
                   {model.name}
-                  {model.multimodal && <Layers className="h-3 w-3 text-muted-foreground" title="Multimodal Support" />}
+                  {model.multimodal && (
+                    <span title="Multimodal Support">
+                      <Layers className="h-3 w-3 text-muted-foreground" />
+                    </span>
+                  )}
                 </CardTitle>
                 <CardDescription className="text-xs">{t.governance.models.managed} {model.owner}</CardDescription>
               </CardHeader>
