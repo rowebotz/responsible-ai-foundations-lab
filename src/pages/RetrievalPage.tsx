@@ -5,23 +5,27 @@ import { Input } from "@/components/ui/input";
 import { Slider } from "@/components/ui/slider";
 import { Progress } from "@/components/ui/progress";
 import { Badge } from "@/components/ui/badge";
-import { Database, Search, Filter } from "lucide-react";
+import { Database, Search, CheckCircle2 } from "lucide-react";
 import { knowledgeBase } from "@/data/mock-intelligence";
 import { cosineSimilarity, getMockQueryVector } from "@/lib/vector-math";
 export function RetrievalPage() {
   const [query, setQuery] = useState("");
   const [threshold, setThreshold] = useState([0.3]);
+  // Vector is only recalculated when query changes
+  const queryVector = useMemo(() => {
+    if (!query) return null;
+    return getMockQueryVector(query);
+  }, [query]);
   const results = useMemo(() => {
-    if (!query) return [];
-    const qVec = getMockQueryVector(query);
+    if (!queryVector) return [];
     return knowledgeBase
       .map(doc => ({
         ...doc,
-        score: cosineSimilarity(qVec, doc.vector)
+        score: cosineSimilarity(queryVector, doc.vector)
       }))
       .filter(doc => doc.score >= threshold[0])
       .sort((a, b) => b.score - a.score);
-  }, [query, threshold]);
+  }, [queryVector, threshold]);
   return (
     <AppLayout container>
       <div className="space-y-8">
@@ -34,8 +38,8 @@ export function RetrievalPage() {
             <label className="text-sm font-medium">Search Query</label>
             <div className="relative">
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-              <Input 
-                placeholder="Enter a banking query (e.g., 'mortgage regulations')..." 
+              <Input
+                placeholder="Enter a banking query (e.g., 'mortgage regulations')..."
                 className="pl-10"
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
@@ -47,11 +51,11 @@ export function RetrievalPage() {
               <span className="font-medium">Relevance Threshold</span>
               <span className="text-muted-foreground">{(threshold[0] * 100).toFixed(0)}%</span>
             </div>
-            <Slider 
-              value={threshold} 
-              onValueChange={setThreshold} 
-              max={1} 
-              step={0.05} 
+            <Slider
+              value={threshold}
+              onValueChange={setThreshold}
+              max={1}
+              step={0.05}
               className="py-2"
             />
           </div>
@@ -95,6 +99,10 @@ export function RetrievalPage() {
                 <CardTitle className="text-sm">Knowledge Base Stats</CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
+                <div className="flex items-center gap-2 text-2xs font-bold text-emerald-600 uppercase tracking-tighter mb-2">
+                  <CheckCircle2 className="h-3 w-3" />
+                  Deterministic Engine Active
+                </div>
                 <div className="flex justify-between text-xs">
                   <span className="text-muted-foreground">Total Documents</span>
                   <span className="font-mono font-bold">{knowledgeBase.length}</span>
@@ -110,7 +118,7 @@ export function RetrievalPage() {
               </CardContent>
             </Card>
             <div className="p-4 rounded-xl border bg-accent/20 text-xs italic text-muted-foreground">
-              Tip: The similarity engine uses client-side cosine distance to rank document chunks based on semantic embeddings.
+              Note: The similarity engine uses client-side cosine distance to rank document chunks based on stable semantic embeddings.
             </div>
           </div>
         </div>

@@ -4,7 +4,7 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/com
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Badge } from "@/components/ui/badge";
-import { ShieldCheck, ShieldAlert, Zap, Search } from "lucide-react";
+import { ShieldCheck, ShieldAlert, Zap } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { guardrailPolicies, blockedPrompts } from "@/data/mock-intelligence";
 export function GuardrailsPage() {
@@ -14,16 +14,29 @@ export function GuardrailsPage() {
   const handleTest = () => {
     if (!input) return;
     setIsTesting(true);
-    // Simulate API delay
+    // Simulate API delay with deterministic results
     setTimeout(() => {
-      const mockResults = guardrailPolicies.map(p => ({
-        id: p.id,
-        status: (input.toLowerCase().includes('secret') || input.toLowerCase().includes('ssn')) ? 
-          (Math.random() > 0.5 ? 'fail' as const : 'pass' as const) : 'pass' as const
-      }));
+      const lowerInput = input.toLowerCase();
+      const mockResults = guardrailPolicies.map(p => {
+        let status: 'pass' | 'fail' = 'pass';
+        // Deterministic Rule Mapping
+        if (p.id === 'p-4' && (lowerInput.includes('secret') || lowerInput.includes('password') || lowerInput.includes('ignore'))) {
+          status = 'fail';
+        }
+        if (p.id === 'p-1' && (lowerInput.includes('ssn') || lowerInput.includes('000-'))) {
+          status = 'fail';
+        }
+        if (p.id === 'p-3' && (lowerInput.includes('invest') || lowerInput.includes('dogecoin') || lowerInput.includes('buy'))) {
+          status = 'fail';
+        }
+        if (p.id === 'p-2' && (lowerInput.includes('hate') || lowerInput.includes('stupid'))) {
+          status = 'fail';
+        }
+        return { id: p.id, status };
+      });
       setResults(mockResults);
       setIsTesting(false);
-    }, 1500);
+    }, 1200);
   };
   return (
     <AppLayout container>
@@ -42,8 +55,8 @@ export function GuardrailsPage() {
               <CardDescription>Enter a prompt to see how it interacts with active guardrails.</CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
-              <Textarea 
-                placeholder="Type a sensitive prompt here (e.g., 'What is the secret admin password?')..." 
+              <Textarea
+                placeholder="Try: 'What is the secret password?' or 'Should I buy Dogecoin?'"
                 className="min-h-[120px] font-mono text-sm bg-secondary/50"
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
@@ -55,10 +68,10 @@ export function GuardrailsPage() {
               </div>
               <AnimatePresence>
                 {results && (
-                  <motion.div 
+                  <motion.div
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
-                    className="grid grid-cols-2 gap-3 pt-4 border-t"
+                    className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-4 border-t"
                   >
                     {guardrailPolicies.map((p) => {
                       const status = results.find(r => r.id === p.id)?.status;
