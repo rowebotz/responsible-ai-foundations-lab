@@ -9,6 +9,7 @@ import { recentTraces, latencyHistory, tokenUsageHistory } from "@/data/mock-tel
 import { useLanguage } from "@/lib/i18n-store";
 import en from "@/data/locales/en.json";
 import es from "@/data/locales/es.json";
+import { Share2 } from "lucide-react";
 export function ObservabilityPage() {
   const currentLang = useLanguage(s => s.current);
   const t = currentLang === 'en' ? en : es;
@@ -16,8 +17,16 @@ export function ObservabilityPage() {
     <AppLayout container>
       <div className="space-y-8">
         <div className="flex flex-col gap-2">
-          <h1 className="text-3xl font-bold tracking-tight">{t.observability.title}</h1>
-          <p className="text-muted-foreground">{t.observability.subtitle}</p>
+          <div className="flex justify-between items-start">
+            <div>
+              <h1 className="text-3xl font-bold tracking-tight">{t.observability.title}</h1>
+              <p className="text-muted-foreground">{t.observability.subtitle}</p>
+            </div>
+            <Badge variant="outline" className="gap-1.5 py-1 px-3">
+              <Share2 className="h-3 w-3" />
+              Frontier Mesh Active
+            </Badge>
+          </div>
         </div>
         <div className="grid gap-6 md:grid-cols-2">
           <Card>
@@ -43,7 +52,7 @@ export function ObservabilityPage() {
                     <CartesianGrid strokeDasharray="3 3" vertical={false} strokeOpacity={0.1} />
                     <XAxis dataKey="time" hide />
                     <YAxis fontSize={10} tickLine={false} axisLine={false} />
-                    <Tooltip contentStyle={{ fontSize: '12px' }} />
+                    <Tooltip contentStyle={{ fontSize: '11px' }} />
                     <Area type="monotone" dataKey="value" stroke="#6366f1" fillOpacity={1} fill="url(#colorLatency)" />
                     <Area type="monotone" dataKey="secondary" stroke="#94a3b8" fillOpacity={0} />
                   </AreaChart>
@@ -67,7 +76,7 @@ export function ObservabilityPage() {
                     <CartesianGrid strokeDasharray="3 3" vertical={false} strokeOpacity={0.1} />
                     <XAxis dataKey="time" hide />
                     <YAxis fontSize={10} tickLine={false} axisLine={false} />
-                    <Tooltip contentStyle={{ fontSize: '12px' }} />
+                    <Tooltip contentStyle={{ fontSize: '11px' }} />
                     <Line type="monotone" dataKey="value" stroke="#10b981" strokeWidth={2} dot={false} />
                   </LineChart>
                 </ResponsiveContainer>
@@ -75,38 +84,38 @@ export function ObservabilityPage() {
             </CardContent>
           </Card>
         </div>
-        <Card>
+        <Card className="border-none shadow-md">
           <CardHeader>
             <CardTitle className="text-base">{t.observability.traces.title}</CardTitle>
           </CardHeader>
-          <CardContent className="p-0">
+          <CardContent className="p-0 overflow-x-auto">
             <Table>
               <TableHeader>
                 <TableRow>
-                  <TableHead className="w-[120px]">{t.observability.traces.id}</TableHead>
+                  <TableHead className="w-[120px] pl-6">{t.observability.traces.id}</TableHead>
                   <TableHead>{t.observability.traces.status}</TableHead>
                   <TableHead>{t.observability.traces.model}</TableHead>
                   <TableHead>{t.observability.traces.latency}</TableHead>
                   <TableHead>{t.observability.traces.tokens}</TableHead>
-                  <TableHead className="max-w-[300px]">{t.observability.traces.input}</TableHead>
+                  <TableHead className="max-w-[300px] pr-6">{t.observability.traces.input}</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
                 {recentTraces.map((trace) => (
                   <TableRow key={trace.id} className="cursor-pointer hover:bg-muted/50 transition-colors">
-                    <TableCell className="font-mono text-xs">{trace.id}</TableCell>
+                    <TableCell className="font-mono text-[10px] pl-6">{trace.id}</TableCell>
                     <TableCell>
-                      <Badge 
-                        variant={trace.status === 'success' ? 'default' : trace.status === 'refused' ? 'outline' : 'destructive'} 
-                        className="capitalize text-[10px]"
+                      <Badge
+                        variant={trace.status === 'success' ? 'default' : trace.status === 'refused' ? 'outline' : 'destructive'}
+                        className="capitalize text-[9px] font-bold"
                       >
                         {trace.status}
                       </Badge>
                     </TableCell>
-                    <TableCell className="text-xs font-medium">{trace.model}</TableCell>
-                    <TableCell className="text-xs">{trace.latency}ms</TableCell>
-                    <TableCell className="text-xs">{trace.tokens}</TableCell>
-                    <TableCell className="text-xs truncate max-w-[300px] text-muted-foreground">{trace.input}</TableCell>
+                    <TableCell className="text-xs font-bold">{trace.model}</TableCell>
+                    <TableCell className="text-xs font-mono">{trace.latency}ms</TableCell>
+                    <TableCell className="text-xs font-mono">{trace.tokens}</TableCell>
+                    <TableCell className="text-xs truncate max-w-[300px] text-muted-foreground pr-6 font-medium">{trace.input}</TableCell>
                   </TableRow>
                 ))}
               </TableBody>

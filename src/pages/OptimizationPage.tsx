@@ -14,22 +14,26 @@ import { Gauge, Zap, DollarSign } from "lucide-react";
 export function OptimizationPage() {
   const currentLang = useLanguage(s => s.current);
   const t = currentLang === 'en' ? en : es;
-  const [modelSize, setModelSize] = useState([70]);
-  const [quant, setQuant] = useState('INT8');
-  const [specDecoding, setSpecDecoding] = useState(false);
+  const [modelSize, setModelSize] = useState([405]);
+  const [quant, setQuant] = useState('FP8');
+  const [specDecoding, setSpecDecoding] = useState(true);
   const results = useMemo(() => {
-    const size = modelSize[0] < 20 ? '7b' : modelSize[0] < 150 ? '70b' : '405b';
+    let size: '7b' | '70b' | '405b' | 'Frontier' = 'Frontier';
+    if (modelSize[0] < 20) size = '7b';
+    else if (modelSize[0] < 150) size = '70b';
+    else if (modelSize[0] < 500) size = '405b';
+    else size = 'Frontier';
     const baseTPS = optimizationConfigs.baseTPS[size];
-    const multiplier = optimizationConfigs.quantizationMultipliers[quant as keyof typeof optimizationConfigs.quantizationMultipliers];
-    const finalTPS = baseTPS * multiplier * (specDecoding ? 1.4 : 1);
+    const multiplier = optimizationConfigs.quantizationMultipliers[quant as keyof typeof optimizationConfigs.quantizationMultipliers] || 1;
+    const finalTPS = baseTPS * multiplier * (specDecoding ? 1.45 : 1);
     const latency = 1000 / (finalTPS / 10);
-    const cost = optimizationConfigs.costPerMillion[size] * 50; // Arbitrary 50M tokens/mo
+    const cost = optimizationConfigs.costPerMillion[size] * 100; // 100M tokens/mo base
     return { tps: finalTPS.toFixed(1), latency: latency.toFixed(0), cost: cost.toFixed(2) };
   }, [modelSize, quant, specDecoding]);
   const chartData = [
-    { name: 'Native', value: 100 },
-    { name: 'Quantized', value: 140 },
-    { name: 'Optimized', value: 195 }
+    { name: 'Baseline', value: 100 },
+    { name: 'Quantized', value: 160 },
+    { name: 'Speculative', value: 232 }
   ];
   return (
     <AppLayout container>
@@ -40,36 +44,36 @@ export function OptimizationPage() {
             <p className="text-lg text-muted-foreground">{t.optimization.subtitle}</p>
           </div>
           <div className="grid gap-8 lg:grid-cols-3">
-            <Card className="lg:col-span-1 border-none shadow-md">
+            <Card className="lg:col-span-1 border-none shadow-md h-fit">
               <CardHeader>
                 <CardTitle className="text-base uppercase tracking-wider">{t.optimization.params}</CardTitle>
               </CardHeader>
               <CardContent className="space-y-8">
                 <div className="space-y-4">
                   <div className="flex justify-between text-xs font-bold uppercase">
-                    <span>Model Parameters (B)</span>
-                    <span className="font-mono">{modelSize[0]}B</span>
+                    <span>Model Size (Billion)</span>
+                    <span className="font-mono text-primary">{modelSize[0]}B</span>
                   </div>
-                  <Slider value={modelSize} onValueChange={setModelSize} max={405} min={7} step={1} />
+                  <Slider value={modelSize} onValueChange={setModelSize} max={1000} min={7} step={1} />
                 </div>
                 <div className="space-y-4">
-                  <Label className="text-xs font-bold uppercase">Quantization</Label>
+                  <Label className="text-xs font-bold uppercase">Precision / Quantization</Label>
                   <div className="flex flex-wrap gap-2">
                     {['None', 'INT8', 'FP8', 'INT4'].map((q) => (
                       <button
                         key={q}
                         onClick={() => setQuant(q)}
-                        className={`px-3 py-1 text-xs rounded-full border transition-colors ${quant === q ? 'bg-primary text-primary-foreground border-primary' : 'hover:bg-muted'}`}
+                        className={`px-3 py-1.5 text-xs font-bold rounded-md border transition-all ${quant === q ? 'bg-primary text-primary-foreground border-primary shadow-sm' : 'hover:bg-muted border-input'}`}
                       >
                         {q}
                       </button>
                     ))}
                   </div>
                 </div>
-                <div className="flex items-center justify-between p-4 bg-muted/50 rounded-lg">
+                <div className="flex items-center justify-between p-4 bg-primary/5 rounded-lg border border-primary/10">
                   <div className="space-y-0.5">
                     <Label className="text-sm font-bold">Speculative Decoding</Label>
-                    <p className="text-[10px] text-muted-foreground uppercase">+40% Throughput</p>
+                    <p className="text-[10px] text-muted-foreground uppercase font-medium">Draft-Model Assisted (+45%)</p>
                   </div>
                   <Switch checked={specDecoding} onCheckedChange={setSpecDecoding} />
                 </div>
@@ -80,30 +84,30 @@ export function OptimizationPage() {
                 <Card className="border-none shadow-sm bg-indigo-50/50 dark:bg-indigo-950/20">
                   <CardContent className="pt-6">
                     <Gauge className="h-4 w-4 text-indigo-500 mb-2" />
-                    <p className="text-xs text-muted-foreground uppercase font-bold">{t.optimization.tps}</p>
-                    <p className="text-2xl font-mono font-bold">{results.tps}</p>
+                    <p className="text-[10px] text-muted-foreground uppercase font-bold">{t.optimization.tps}</p>
+                    <p className="text-2xl font-mono font-bold text-indigo-700 dark:text-indigo-400">{results.tps}</p>
                   </CardContent>
                 </Card>
                 <Card className="border-none shadow-sm bg-emerald-50/50 dark:bg-emerald-950/20">
                   <CardContent className="pt-6">
                     <Zap className="h-4 w-4 text-emerald-500 mb-2" />
-                    <p className="text-xs text-muted-foreground uppercase font-bold">Avg Latency</p>
-                    <p className="text-2xl font-mono font-bold">{results.latency}ms</p>
+                    <p className="text-[10px] text-muted-foreground uppercase font-bold">Avg Latency</p>
+                    <p className="text-2xl font-mono font-bold text-emerald-700 dark:text-emerald-400">{results.latency}ms</p>
                   </CardContent>
                 </Card>
                 <Card className="border-none shadow-sm bg-rose-50/50 dark:bg-rose-950/20">
                   <CardContent className="pt-6">
                     <DollarSign className="h-4 w-4 text-rose-500 mb-2" />
-                    <p className="text-xs text-muted-foreground uppercase font-bold">{t.optimization.monthly}</p>
-                    <p className="text-2xl font-mono font-bold">${results.cost}</p>
+                    <p className="text-[10px] text-muted-foreground uppercase font-bold">{t.optimization.monthly} (100M tokens)</p>
+                    <p className="text-2xl font-mono font-bold text-rose-700 dark:text-rose-400">${results.cost}</p>
                   </CardContent>
                 </Card>
               </div>
               <Card className="border-none shadow-md">
                 <CardContent className="pt-6">
                   <AccessibleChart
-                    title="Optimization Efficiency"
-                    description="Performance gains relative to native float16 baseline through hardware-specific kernels."
+                    title="2026 Hardware Gain Efficiency"
+                    description="Performance gains relative to standard float16 inference through hardware-optimized kernels."
                     data={chartData}
                     columns={[{key: 'name', label: 'Strategy'}, {key: 'value', label: 'Gain (%)'}]}
                   >
@@ -112,7 +116,7 @@ export function OptimizationPage() {
                         <CartesianGrid strokeDasharray="3 3" vertical={false} strokeOpacity={0.1} />
                         <XAxis dataKey="name" fontSize={10} axisLine={false} tickLine={false} />
                         <YAxis hide />
-                        <Tooltip />
+                        <Tooltip contentStyle={{ fontSize: '11px' }} />
                         <Bar dataKey="value" fill="#6366f1" radius={[4, 4, 0, 0]} />
                       </BarChart>
                     </ResponsiveContainer>
