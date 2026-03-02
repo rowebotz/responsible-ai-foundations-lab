@@ -1,25 +1,25 @@
 # Veritas AI Lab
 
-[![Deploy to Cloudflare](https://deploy.workers.cloudflare.com/button)](https://deploy.workers.cloudflare.com/?url=https://github.com/rowebotz/responsible-ai-foundations-lab)
+A production-ready full-stack web application. Featuring a modern React frontend with shadcn/ui, Tailwind CSS, and a Hono-powered API backend. Designed for high performance, scalability, and developer experience.
 
-A production-ready full-stack web application built on Cloudflare Workers and Pages. Featuring a modern React frontend with shadcn/ui, Tailwind CSS, and a Hono-powered API backend. Designed for high performance, scalability, and developer experience.
+Created by [Stephen Rowe](https://www.digitalrowe.com).
 
 ## Features
 
 - **Modern React Stack**: React 18, React Router, Tanstack Query, Zustand for state management
 - **Beautiful UI**: shadcn/ui components, Tailwind CSS with custom design system, dark/light mode support
-- **Full-Stack API**: Cloudflare Workers with Hono routing, CORS, logging, and error handling
+- **Full-Stack API**: Hono routing, CORS, logging, and error handling
 - **Developer Tools**: Vite for ultra-fast dev server and builds, TypeScript with strict typing, ESLint
 - **Responsive Design**: Mobile-first, sidebar layout option, animations, glassmorphism effects
 - **Production-Ready**: Error boundaries, client error reporting, health checks, SPA routing
 - **Easy Customization**: Modular structure, extensible user routes in `worker/userRoutes.ts`
-- **Deployment Ready**: One-command deploy to Cloudflare with `bun deploy`
+- **Deployment Ready**: One-command deploy with `bun deploy`
 
 ## Tech Stack
 
 | Frontend | Backend | Tools & Utils |
 |----------|---------|---------------|
-| React, TypeScript | Cloudflare Workers, Hono | Vite, Bun, Tailwind CSS |
+| React, TypeScript | Hono | Vite, Bun, Tailwind CSS |
 | shadcn/ui, Lucide Icons | Durable Objects & KV Ready | Tanstack Query, React Hook Form |
 | Framer Motion, Sonner | CORS & Logging | ESLint, TypeScript 5 |
 
@@ -28,8 +28,6 @@ A production-ready full-stack web application built on Cloudflare Workers and Pa
 ### Prerequisites
 
 - [Bun](https://bun.sh/) installed (≥1.0)
-- [Cloudflare CLI (Wrangler)](https://developers.cloudflare.com/workers/wrangler/install-and-update/) for deployment
-- Cloudflare account with Pages/Workers enabled
 
 ### Installation
 
@@ -61,13 +59,10 @@ bun dev
 bun run build
 ```
 
-Outputs optimized assets to `dist/` for Cloudflare Pages.
+Outputs optimized assets to `dist/`.
 
 ### Deploy
 
-[![Deploy to Cloudflare](https://deploy.workers.cloudflare.com/button)](https://deploy.workers.cloudflare.com/?url=https://github.com/rowebotz/responsible-ai-foundations-lab)
-
-Deploy to Cloudflare:
 ```bash
 bun run deploy
 ```
@@ -107,7 +102,7 @@ app.post('/api/users', async (c) => {
 | `bun dev` | Start dev server |
 | `bun build` | Production build |
 | `bun lint` | Run ESLint |
-| `bun deploy` | Build + deploy to Cloudflare |
+| `bun deploy` | Build + deploy |
 | `bun preview` | Preview production build |
 
 ## Project Structure
@@ -119,7 +114,7 @@ app.post('/api/users', async (c) => {
 │   ├── lib/             # Utilities, error reporting
 │   ├── pages/           # Route pages
 │   └── main.tsx         # App entry
-├── worker/              # Cloudflare Worker backend
+├── worker/              # API backend
 │   ├── index.ts         # Core router (do not edit)
 │   └── userRoutes.ts    # Add your API routes here
 ├── tailwind.config.js   # Design system
@@ -147,7 +142,3 @@ app.post('/api/users', async (c) => {
 3. Create feature branch (`bun dev`)
 4. Commit changes (`bun lint`)
 5. Submit PR
-
-## License
-
-MIT License. See [LICENSE](LICENSE) for details.
