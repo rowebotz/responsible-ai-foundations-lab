@@ -34,10 +34,10 @@ export function AppLayout({ children, container = false, className, contentClass
             <span className="tracking-tight">Veritas AI <span className="text-muted-foreground font-normal ml-1 border-l pl-2">Lab</span></span>
           </div>
           <div className="ml-auto flex items-center gap-3">
-            <Button 
-              variant="ghost" 
-              size="sm" 
-              onClick={toggleLanguage} 
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={toggleLanguage}
               className="text-xs font-mono h-8 gap-2"
               aria-label={`Switch language. Current: ${currentLang.toUpperCase()}`}
             >
@@ -67,7 +67,7 @@ export function AppLayout({ children, container = false, className, contentClass
         </main>
         <footer className="border-t py-8 px-6 bg-muted/20" role="contentinfo">
           <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6 text-xs text-muted-foreground">
-            <p>© 2024 Veritas AI Governance Platform.</p>
+            <p>© 2026 Veritas AI Governance Platform.</p>
             <p className="font-medium">
               {t.common.footer}{" "}
               <a
