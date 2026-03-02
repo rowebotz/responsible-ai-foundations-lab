@@ -24,6 +24,25 @@
       "footer": "Real-time telemetry: Tokens flow through safety filters and localized knowledge retrieval."
     }
   },
+  "observability": {
+    "title": "Observability",
+    "subtitle": "Performance monitoring and request tracing.",
+    "charts": {
+      "latency": "Latency Distribution (ms)",
+      "latencyDesc": "Historical P50 and P95 latency metrics across all integrated LLM endpoints.",
+      "tokens": "Token Throughput",
+      "tokensDesc": "Real-time aggregate token consumption and processing speed."
+    },
+    "traces": {
+      "title": "Recent Request Traces",
+      "id": "Trace ID",
+      "status": "Status",
+      "model": "Model",
+      "latency": "Latency",
+      "tokens": "Tokens",
+      "input": "Input Prompt"
+    }
+  },
   "guardrails": {
     "title": "Safety Enforcement",
     "subtitle": "Regulatory compliance and risk mitigation via real-time policy filters.",
@@ -38,6 +57,67 @@
       "title": "High-Risk Violation Audit",
       "severity": "Severity"
     }
+  },
+  "retrieval": {
+    "title": "Semantic Retrieval (RAG)",
+    "subtitle": "Analyze document relevance and vector similarity scores in real-time.",
+    "search": {
+      "label": "Search Query",
+      "placeholder": "Enter a banking query (e.g., 'mortgage regulations')...",
+      "threshold": "Relevance Threshold"
+    },
+    "stats": {
+      "title": "Knowledge Base Stats",
+      "engine": "Deterministic Engine Active",
+      "total": "Total Documents",
+      "dims": "Vector Dimensions",
+      "strategy": "Index Strategy"
+    },
+    "empty": "No documents match this threshold.",
+    "initial": "Enter a query to begin retrieval."
+  },
+  "evaluation": {
+    "title": "Model Evaluation",
+    "subtitle": "Head-to-head comparison of model performance on standard banking benchmarks.",
+    "scenario": {
+      "title": "Dataset Scenario: Loan Risk Extraction",
+      "desc": "Evaluates ability to identify risk vectors in commercial lending documents."
+    },
+    "metrics": {
+      "accuracy": "Accuracy",
+      "similarity": "Semantic Similarity",
+      "truth": "Truthfulness Score",
+      "speed": "Speed",
+      "latency": "Latent Time",
+      "aggregate": "Aggregate Metric Breakdown"
+    }
+  },
+  "governance": {
+    "title": "Governance & Risk",
+    "subtitle": "Model inventory, compliance checks, and system audit logs.",
+    "models": {
+      "risk": "Risk",
+      "managed": "Managed by",
+      "validation": "Validation",
+      "status": "Status"
+    },
+    "audit": {
+      "title": "System Audit Log",
+      "desc": "Immutable record of configuration changes and administrative actions.",
+      "timestamp": "Timestamp",
+      "user": "User",
+      "action": "Action",
+      "target": "Target Component"
+    }
+  },
+  "about": {
+    "title": "About the Lab",
+    "subtitle": "Veritas AI Lab is an independently engineered prototype of an enterprise-grade AI control plane, designed to exemplify scalable systems thinking for LLM deployments.",
+    "visionTitle": "Architectural Vision",
+    "visionDesc": "The platform provides a blueprint for managing the 'unpredictable' nature of large language models. By centralizing the request flow, enterprises can maintain rigorous oversight without sacrificing agility.",
+    "capabilities": "Key Capabilities",
+    "version": "Prototype Version 1.2.0-Stable",
+    "footer": "This laboratory environment uses high-fidelity mock data and client-side calculations for demonstration purposes."
   },
   "common": {
     "skip": "Skip to main content",

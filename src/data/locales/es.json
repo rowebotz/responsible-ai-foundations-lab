@@ -24,6 +24,25 @@
       "footer": "Telemetría en tiempo real: flujo de tokens a través de filtros de seguridad."
     }
   },
+  "observability": {
+    "title": "Observabilidad",
+    "subtitle": "Monitoreo de rendimiento y rastreo de solicitudes.",
+    "charts": {
+      "latency": "Distribución de Latencia (ms)",
+      "latencyDesc": "Métricas históricas de latencia P50 y P95 en todos los modelos integrados.",
+      "tokens": "Flujo de Tokens",
+      "tokensDesc": "Consumo de tokens agregado en tiempo real y velocidad de procesamiento."
+    },
+    "traces": {
+      "title": "Rastros de Solicitudes Recientes",
+      "id": "ID de Rastro",
+      "status": "Estado",
+      "model": "Modelo",
+      "latency": "Latencia",
+      "tokens": "Tokens",
+      "input": "Prompt de Entrada"
+    }
+  },
   "guardrails": {
     "title": "Ejecución de Seguridad",
     "subtitle": "Cumplimiento normativo y mitigación de riesgos mediante filtros en tiempo real.",
@@ -38,6 +57,67 @@
       "title": "Auditoría de Violaciones de Alto Riesgo",
       "severity": "Severidad"
     }
+  },
+  "retrieval": {
+    "title": "Recuperación Semántica (RAG)",
+    "subtitle": "Analice la relevancia de documentos y puntuaciones de similitud vectorial en tiempo real.",
+    "search": {
+      "label": "Consulta de Búsqueda",
+      "placeholder": "Ingrese una consulta bancaria (ej. 'regulaciones hipotecarias')...",
+      "threshold": "Umbral de Relevancia"
+    },
+    "stats": {
+      "title": "Estadísticas de la Base de Conocimiento",
+      "engine": "Motor Determinístico Activo",
+      "total": "Documentos Totales",
+      "dims": "Dimensiones Vectoriales",
+      "strategy": "Estrategia de Índice"
+    },
+    "empty": "No hay documentos que coincidan con este umbral.",
+    "initial": "Ingrese una consulta para comenzar la recuperación."
+  },
+  "evaluation": {
+    "title": "Evaluación de Modelos",
+    "subtitle": "Comparación directa del rendimiento de modelos en estándares bancarios.",
+    "scenario": {
+      "title": "Escenario del Dataset: Extracción de Riesgo de Préstamo",
+      "desc": "Evalúa la capacidad para identificar vectores de riesgo en documentos comerciales."
+    },
+    "metrics": {
+      "accuracy": "Precisión",
+      "similarity": "Similitud Semántica",
+      "truth": "Puntuación de Veracidad",
+      "speed": "Velocidad",
+      "latency": "Tiempo Latente",
+      "aggregate": "Desglose de Métricas Agregadas"
+    }
+  },
+  "governance": {
+    "title": "Gobernanza y Riesgo",
+    "subtitle": "Inventario de modelos, verificaciones de cumplimiento y registros de auditoría.",
+    "models": {
+      "risk": "Riesgo",
+      "managed": "Gestionado por",
+      "validation": "Validación",
+      "status": "Estado"
+    },
+    "audit": {
+      "title": "Registro de Auditoría del Sistema",
+      "desc": "Registro inmutable de cambios de configuración y acciones administrativas.",
+      "timestamp": "Marca de tiempo",
+      "user": "Usuario",
+      "action": "Acción",
+      "target": "Componente Objetivo"
+    }
+  },
+  "about": {
+    "title": "Sobre el Laboratorio",
+    "subtitle": "Veritas AI Lab es un prototipo diseñado independientemente de un plano de control de IA empresarial.",
+    "visionTitle": "Visión Arquitectónica",
+    "visionDesc": "La plataforma proporciona un plano para gestionar la naturaleza 'impredecible' de los modelos de lenguaje. Al centralizar el flujo de solicitudes, las empresas mantienen una supervisión rigurosa.",
+    "capabilities": "Capacidades Clave",
+    "version": "Versión del Prototipo 1.2.0-Estable",
+    "footer": "Este entorno de laboratorio utiliza datos simulados de alta fidelidad para fines de demostración."
   },
   "common": {
     "skip": "Saltar al contenido principal",

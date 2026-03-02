@@ -1,16 +1,16 @@
 import '@/lib/errorReporter';
 import { enableMapSet } from "immer";
 enableMapSet();
-import React, { StrictMode, useEffect } from 'react'
+import React, { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import {
   createBrowserRouter,
   RouterProvider,
-  useLocation,
 } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ErrorBoundary } from '@/components/ErrorBoundary';
 import { RouteErrorBoundary } from '@/components/RouteErrorBoundary';
+import { RouteAnnouncer } from '@/components/RouteAnnouncer';
 import '@/index.css'
 // Page Imports
 import { OverviewPage } from '@/pages/OverviewPage';
@@ -21,19 +21,6 @@ import { RetrievalPage } from '@/pages/RetrievalPage';
 import { EvaluationPage } from '@/pages/EvaluationPage';
 import { AboutPage } from '@/pages/AboutPage';
 const queryClient = new QueryClient();
-function RouteAnnouncer() {
-  const location = useLocation();
-  useEffect(() => {
-    const announcer = document.getElementById('route-announcer');
-    if (announcer) {
-      const pageName = location.pathname === '/' 
-        ? 'Overview' 
-        : location.pathname.substring(1).charAt(0).toUpperCase() + location.pathname.substring(2);
-      announcer.textContent = `Navigated to ${pageName} page`;
-    }
-  }, [location]);
-  return null;
-}
 const router = createBrowserRouter([
   {
     path: "/",
