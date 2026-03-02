@@ -23,17 +23,22 @@ import {
   SidebarMenuItem,
   SidebarMenuButton,
 } from "@/components/ui/sidebar";
-const navItems = [
-  { title: "Overview", icon: Home, url: "/" },
-  { title: "Observability", icon: Activity, url: "/observability" },
-  { title: "Guardrails", icon: ShieldCheck, url: "/guardrails" },
-  { title: "Retrieval (RAG)", icon: Database, url: "/retrieval" },
-  { title: "Evaluation", icon: Zap, url: "/evaluation" },
-  { title: "Governance", icon: Gavel, url: "/governance" },
-  { title: "About", icon: Info, url: "/about" },
-];
+import { useLanguage } from "@/lib/i18n-store";
+import en from "@/data/locales/en.json";
+import es from "@/data/locales/es.json";
 export function AppSidebar(): JSX.Element {
   const location = useLocation();
+  const currentLang = useLanguage(s => s.current);
+  const t = currentLang === 'en' ? en : es;
+  const navItems = [
+    { title: t.nav.overview, icon: Home, url: "/" },
+    { title: t.nav.observability, icon: Activity, url: "/observability" },
+    { title: t.nav.guardrails, icon: ShieldCheck, url: "/guardrails" },
+    { title: t.nav.retrieval, icon: Database, url: "/retrieval" },
+    { title: t.nav.evaluation, icon: Zap, url: "/evaluation" },
+    { title: t.nav.governance, icon: Gavel, url: "/governance" },
+    { title: t.nav.about, icon: Info, url: "/about" },
+  ];
   return (
     <Sidebar variant="sidebar" collapsible="icon">
       <SidebarHeader>
@@ -54,7 +59,7 @@ export function AppSidebar(): JSX.Element {
           </SidebarGroupLabel>
           <SidebarMenu>
             {navItems.map((item) => (
-              <SidebarMenuItem key={item.title}>
+              <SidebarMenuItem key={item.url}>
                 <SidebarMenuButton
                   asChild
                   isActive={location.pathname === item.url}
@@ -74,15 +79,15 @@ export function AppSidebar(): JSX.Element {
         <SidebarGroup className="mt-auto">
           <SidebarMenu>
             <SidebarMenuItem>
-              <SidebarMenuButton tooltip="Support">
+              <SidebarMenuButton tooltip={t.nav.documentation}>
                 <Database className="size-4 opacity-50" />
-                <span className="font-medium">Documentation</span>
+                <span className="font-medium">{t.nav.documentation}</span>
               </SidebarMenuButton>
             </SidebarMenuItem>
             <SidebarMenuItem>
-              <SidebarMenuButton tooltip="Settings">
+              <SidebarMenuButton tooltip={t.nav.settings}>
                 <Settings className="size-4" />
-                <span className="font-medium">Settings</span>
+                <span className="font-medium">{t.nav.settings}</span>
               </SidebarMenuButton>
             </SidebarMenuItem>
           </SidebarMenu>
@@ -95,7 +100,7 @@ export function AppSidebar(): JSX.Element {
           </div>
           <div className="flex flex-col min-w-0">
             <span className="text-xs font-semibold truncate">Enterprise Lab</span>
-            <span className="text-2xs text-muted-foreground truncate">v1.2.0-stable</span>
+            <span className="text-2xs text-muted-foreground truncate">{t.common.stable}</span>
           </div>
         </div>
       </SidebarFooter>

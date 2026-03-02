@@ -13,7 +13,7 @@ import { RouteErrorBoundary } from '@/components/RouteErrorBoundary';
 import { RouteAnnouncer } from '@/components/RouteAnnouncer';
 import '@/index.css'
 // Page Imports
-import { OverviewPage } from '@/pages/OverviewPage';
+import { HomePage } from '@/pages/HomePage';
 import { ObservabilityPage } from '@/pages/ObservabilityPage';
 import { GovernancePage } from '@/pages/GovernancePage';
 import { GuardrailsPage } from '@/pages/GuardrailsPage';
@@ -24,7 +24,7 @@ const queryClient = new QueryClient();
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <><RouteAnnouncer /><OverviewPage /></>,
+    element: <><RouteAnnouncer /><HomePage /></>,
     errorElement: <RouteErrorBoundary />,
   },
   {
@@ -58,7 +58,6 @@ const router = createBrowserRouter([
     errorElement: <RouteErrorBoundary />,
   },
 ]);
-// Use a global variable to store the root and prevent duplicate initialization
 declare global {
   interface Window {
     __veritas_root__?: Root;

@@ -15,9 +15,9 @@ export function AccessibleChart({ children, data, title, description, columns }:
     <div className="space-y-4">
       <div className="flex items-center justify-between">
         <h3 className="text-sm font-bold tracking-tight uppercase text-muted-foreground">{title}</h3>
-        <Button 
-          variant="outline" 
-          size="sm" 
+        <Button
+          variant="outline"
+          size="sm"
           onClick={() => setShowTable(!showTable)}
           className="h-7 text-xs gap-2"
         >
@@ -31,12 +31,12 @@ export function AccessibleChart({ children, data, title, description, columns }:
             {children}
           </div>
         ) : (
-          <div className="border rounded-md bg-card overflow-hidden">
+          <div className="border rounded-md bg-card overflow-hidden overflow-x-auto">
             <Table>
               <TableHeader>
                 <TableRow>
                   {columns.map(col => (
-                    <TableHead key={col.key} className="text-xs">{col.label}</TableHead>
+                    <TableHead key={col.key} className="text-xs whitespace-nowrap">{col.label}</TableHead>
                   ))}
                 </TableRow>
               </TableHeader>
@@ -44,7 +44,7 @@ export function AccessibleChart({ children, data, title, description, columns }:
                 {data.slice(0, 10).map((row, i) => (
                   <TableRow key={i}>
                     {columns.map(col => (
-                      <TableCell key={col.key} className="text-xs font-mono">{row[col.key]}</TableCell>
+                      <TableCell key={col.key} className="text-xs font-mono whitespace-nowrap">{row[col.key]}</TableCell>
                     ))}
                   </TableRow>
                 ))}
