@@ -45,6 +45,22 @@ export function AppLayout({ children, container = false, className, contentClass
             children
           )}
         </main>
+        <footer className="border-t py-6 px-6 bg-muted/20">
+          <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-muted-foreground">
+            <p>© 2024 Veritas AI Lab. All rights reserved.</p>
+            <p>
+              Designed and engineered by{" "}
+              <a 
+                href="https://stephenrowe.com" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="font-medium text-foreground hover:underline transition-colors"
+              >
+                Stephen Rowe
+              </a>.
+            </p>
+          </div>
+        </footer>
       </SidebarInset>
     </SidebarProvider>
   );

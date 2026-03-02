@@ -2,74 +2,62 @@ import React from "react";
 import { AppLayout } from "@/components/layout/AppLayout";
 import { SEO } from "@/components/SEO";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Shield, Cpu, Zap, Rocket, Globe, GitBranch, CheckCircle2 } from "lucide-react";
-import { useLanguage } from "@/lib/i18n-store";
-import en from "@/data/locales/en.json";
-import es from "@/data/locales/es.json";
+import { Shield, Database, Activity, Cpu, CheckCircle2, Zap } from "lucide-react";
 export function AboutPage() {
-  const currentLang = useLanguage(s => s.current);
-  const t = currentLang === 'en' ? en : es;
-  const visions = [
-    { title: t.about.vision.reliability, desc: "Built for five-nines availability in regulated financial markets.", icon: Shield },
-    { title: t.about.vision.scalability, desc: "Distributed vector engines for sub-100ms global inference.", icon: Globe },
-    { title: t.about.vision.governance, desc: "Immutable audit trails for compliance with EU AI Act and local regulations.", icon: Cpu },
-    { title: t.about.vision.cost, desc: "Automated model routing to minimize TCO without compromising accuracy.", icon: Zap },
-  ];
-  const roadmap = [
-    { phase: "Q3 2026", title: t.about.roadmap.phase1, desc: "Latency-optimized clusters across major financial hubs.", icon: Globe },
-    { phase: "Q4 2026", title: t.about.roadmap.phase2, desc: "Dynamic traffic shifting between provider clusters.", icon: Rocket },
-    { phase: "Q1 2027", title: t.about.roadmap.phase3, desc: "Unified pipeline for model fine-tuning and safety alignment.", icon: GitBranch },
+  const capabilities = [
+    { title: "Guardrail Simulation", desc: "Real-time safety policy enforcement and red-team violation tracking.", icon: Shield },
+    { title: "Client-side RAG", desc: "Semantic retrieval workflows using localized vector similarity engines.", icon: Database },
+    { title: "Model Benchmarking", desc: "Comparative evaluation of LLM performance on standardized financial datasets.", icon: Zap },
+    { title: "Telemetry & Tracing", desc: "Deep-dive observability into latency, token usage, and request lifecycles.", icon: Activity },
+    { title: "Risk Governance", desc: "Formalized model inventory, version control, and compliance audit logging.", icon: Cpu },
   ];
   return (
     <AppLayout container>
-      <SEO title={`About | Veritas AI Lab`} />
-      <div className="max-w-3xl space-y-16">
+      <SEO title="About | Veritas AI Lab" />
+      <div className="max-w-3xl space-y-12">
         <div className="space-y-4">
-          <h1 className="text-4xl font-bold tracking-tight text-primary">{t.about.title}</h1>
+          <h1 className="text-4xl font-bold tracking-tight">About the Lab</h1>
           <p className="text-xl text-muted-foreground leading-relaxed">
-            {t.about.subtitle}
+            Veritas AI Lab is an independently engineered prototype of an enterprise-grade AI control plane, 
+            designed to exemplify scalable systems thinking for LLM deployments in regulated financial services.
           </p>
         </div>
-        <section className="space-y-8">
-          <h2 className="text-2xl font-bold tracking-tight border-b pb-2">{t.about.visionTitle}</h2>
-          <div className="grid gap-6 md:grid-cols-2">
-            {visions.map((v) => (
-              <Card key={v.title} className="border-none shadow-md hover:ring-1 ring-primary/20 transition-all">
-                <CardHeader className="flex flex-row items-center gap-4">
-                  <div className="p-2 rounded-lg bg-primary/5">
-                    <v.icon className="h-5 w-5 text-primary" />
+        <section className="space-y-4">
+          <h2 className="text-2xl font-bold">Architectural Vision</h2>
+          <p className="text-muted-foreground leading-relaxed">
+            The platform provides a blueprint for managing the "unpredictable" nature of large language models. 
+            By centralizing the request flow—orchestrating gateway logic, safety guardrails, knowledge retrieval, 
+            and inference—enterprises can maintain rigorous oversight without sacrificing the agility of AI innovation. 
+            This simulation demonstrates how observability and governance are not just "add-ons," but fundamental 
+            components of a responsible AI infrastructure.
+          </p>
+        </section>
+        <section className="space-y-6">
+          <h2 className="text-2xl font-bold">Key Capabilities</h2>
+          <div className="grid gap-4">
+            {capabilities.map((cap) => (
+              <Card key={cap.title} className="border-none bg-accent/30 shadow-none">
+                <CardHeader className="flex flex-row items-center gap-4 py-4">
+                  <div className="p-2 rounded-lg bg-background">
+                    <cap.icon className="h-5 w-5 text-primary" />
                   </div>
-                  <CardTitle className="text-base font-bold">{v.title}</CardTitle>
+                  <div className="space-y-1">
+                    <CardTitle className="text-base">{cap.title}</CardTitle>
+                    <p className="text-sm text-muted-foreground">{cap.desc}</p>
+                  </div>
                 </CardHeader>
-                <CardContent>
-                  <p className="text-sm text-muted-foreground leading-relaxed">{v.desc}</p>
-                </CardContent>
               </Card>
             ))}
           </div>
         </section>
-        <section className="space-y-8">
-          <h2 className="text-2xl font-bold tracking-tight border-b pb-2">{t.about.roadmap.title}</h2>
-          <div className="relative border-l-2 border-primary/10 ml-4 space-y-12">
-            {roadmap.map((item, idx) => (
-              <div key={idx} className="relative pl-8">
-                <div className="absolute -left-[9px] top-1 h-4 w-4 rounded-full bg-background border-2 border-primary" />
-                <div className="space-y-1">
-                  <span className="text-xs font-bold text-primary uppercase tracking-widest">{item.phase}</span>
-                  <h3 className="text-lg font-bold">{item.title}</h3>
-                  <p className="text-sm text-muted-foreground leading-relaxed max-w-xl">{item.desc}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </section>
-        <section className="pt-12 border-t space-y-4">
-          <div className="flex items-center gap-2 text-sm text-muted-foreground font-medium">
+        <section className="pt-8 border-t space-y-4">
+          <div className="flex items-center gap-2 text-sm text-muted-foreground">
             <CheckCircle2 className="h-4 w-4 text-emerald-500" />
-            <span>{t.about.version}</span>
+            <span>Prototype Version 1.2.0-Stable</span>
           </div>
-          <p className="text-xs text-muted-foreground italic leading-relaxed">
-            {t.about.footer}
+          <p className="text-xs text-muted-foreground italic">
+            This laboratory environment uses high-fidelity mock data and client-side calculations 
+            to simulate complex backend operations for demonstration purposes.
           </p>
         </section>
       </div>

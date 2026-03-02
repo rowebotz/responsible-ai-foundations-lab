@@ -18,6 +18,7 @@ import { GovernancePage } from '@/pages/GovernancePage';
 import { GuardrailsPage } from '@/pages/GuardrailsPage';
 import { RetrievalPage } from '@/pages/RetrievalPage';
 import { EvaluationPage } from '@/pages/EvaluationPage';
+import { AboutPage } from '@/pages/AboutPage';
 const queryClient = new QueryClient();
 // Route Configuration
 const router = createBrowserRouter([
@@ -49,6 +50,11 @@ const router = createBrowserRouter([
   {
     path: "/evaluation",
     element: <EvaluationPage />,
+    errorElement: <RouteErrorBoundary />,
+  },
+  {
+    path: "/about",
+    element: <AboutPage />,
     errorElement: <RouteErrorBoundary />,
   },
 ]);

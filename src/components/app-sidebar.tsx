@@ -1,14 +1,14 @@
 import React from "react";
 import { Link, useLocation } from "react-router-dom";
-import { 
-  Home, 
-  Activity, 
-  ShieldCheck, 
-  Database, 
-  Zap, 
-  Gavel, 
-  Settings, 
-  LifeBuoy,
+import {
+  Home,
+  Activity,
+  ShieldCheck,
+  Database,
+  Zap,
+  Gavel,
+  Settings,
+  Info,
   LayoutDashboard
 } from "lucide-react";
 import {
@@ -30,6 +30,7 @@ const navItems = [
   { title: "Retrieval (RAG)", icon: Database, url: "/retrieval" },
   { title: "Evaluation", icon: Zap, url: "/evaluation" },
   { title: "Governance", icon: Gavel, url: "/governance" },
+  { title: "About", icon: Info, url: "/about" },
 ];
 export function AppSidebar(): JSX.Element {
   const location = useLocation();
@@ -54,8 +55,8 @@ export function AppSidebar(): JSX.Element {
           <SidebarMenu>
             {navItems.map((item) => (
               <SidebarMenuItem key={item.title}>
-                <SidebarMenuButton 
-                  asChild 
+                <SidebarMenuButton
+                  asChild
                   isActive={location.pathname === item.url}
                   tooltip={item.title}
                   className="transition-all duration-200"
@@ -74,7 +75,7 @@ export function AppSidebar(): JSX.Element {
           <SidebarMenu>
             <SidebarMenuItem>
               <SidebarMenuButton tooltip="Support">
-                <LifeBuoy className="size-4" />
+                <Database className="size-4 opacity-50" />
                 <span className="font-medium">Documentation</span>
               </SidebarMenuButton>
             </SidebarMenuItem>
