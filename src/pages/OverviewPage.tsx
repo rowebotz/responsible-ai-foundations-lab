@@ -1,11 +1,13 @@
 import React from "react";
 import { AppLayout } from "@/components/layout/AppLayout";
 import { MetricCard } from "@/components/ui/metric-card";
+import { SEO } from "@/components/SEO";
 import { SystemDiagram } from "@/components/architecture/SystemDiagram";
 import { Activity, ShieldAlert, Cpu, Timer } from "lucide-react";
 export function OverviewPage() {
   return (
     <AppLayout container>
+      <SEO title="Responsible AI Foundations Lab | Stephen Rowe" />
       <div className="space-y-10">
         <div className="flex flex-col gap-2">
           <h1 className="text-3xl font-bold tracking-tight">System Overview</h1>

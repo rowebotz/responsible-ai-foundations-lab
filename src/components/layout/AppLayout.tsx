@@ -3,6 +3,7 @@ import { SidebarProvider, SidebarInset, SidebarTrigger } from "@/components/ui/s
 import { AppSidebar } from "@/components/app-sidebar";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { ShieldCheck, User } from "lucide-react";
+import { SEO } from "@/components/SEO";
 import { cn } from "@/lib/utils";
 type AppLayoutProps = {
   children: React.ReactNode;
@@ -13,6 +14,7 @@ type AppLayoutProps = {
 export function AppLayout({ children, container = false, className, contentClassName }: AppLayoutProps): JSX.Element {
   return (
     <SidebarProvider defaultOpen={true}>
+      <SEO />
       <AppSidebar />
       <SidebarInset className={cn("flex flex-col min-h-screen bg-background", className)}>
         <header className="sticky top-0 z-30 flex h-16 items-center gap-4 border-b bg-background/95 px-6 backdrop-blur">

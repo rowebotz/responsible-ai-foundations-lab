@@ -4,7 +4,7 @@ interface SEOProps {
   title?: string;
   description?: string;
 }
-export function SEO({
+export function SEO({ 
   title = "Responsible AI Foundations Lab | Stephen Rowe",
   description = "Enterprise AI platform prototype demonstrating LLM evaluation, guardrails, similarity search, observability, experimentation, and governance. Designed and engineered by Stephen Rowe."
 }: SEOProps) {
@@ -19,7 +19,6 @@ export function SEO({
     }
     // Update OG URL dynamically
     const currentUrl = window.location.origin + location.pathname;
-    const placeholderImage = "https://placehold.co/1200x630/0f172a/6366f1?text=Veritas+AI+Lab";
     const updateMeta = (property: string, content: string, attr: 'property' | 'name' = 'property') => {
       let element = document.querySelector(`meta[${attr}="${property}"]`);
       if (!element) {
@@ -32,13 +31,11 @@ export function SEO({
     // Update OG tags
     updateMeta('og:url', currentUrl);
     updateMeta('og:title', "Responsible AI Foundations Lab | Enterprise AI Platform Prototype");
-    updateMeta('og:description', description);
-    updateMeta('og:image', placeholderImage);
+    updateMeta('og:description', "Production-style AI systems demo showcasing model evaluation harnesses, policy guardrails, retrieval architecture, telemetry dashboards, and responsible AI governance.");
     // Update Twitter tags
     updateMeta('twitter:url', currentUrl);
     updateMeta('twitter:title', "Responsible AI Foundations Lab | Enterprise AI Platform Prototype", 'name');
-    updateMeta('twitter:description', description, 'name');
-    updateMeta('twitter:image', placeholderImage, 'name');
+    updateMeta('twitter:description', "Production-style AI systems demo showcasing model evaluation harnesses, policy guardrails, retrieval architecture, telemetry dashboards, and responsible AI governance.", 'name');
   }, [title, description, location.pathname]);
   return null;
 }

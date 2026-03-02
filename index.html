@@ -4,27 +4,28 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite + React + TS</title>
+    <!-- Primary Meta Tags -->
+    <title>Responsible AI Foundations Lab | Stephen Rowe</title>
+    <meta name="title" content="Responsible AI Foundations Lab | Stephen Rowe" />
+    <meta name="description" content="Enterprise AI platform prototype demonstrating LLM evaluation, guardrails, similarity search, observability, experimentation, and governance. Designed and engineered by Stephen Rowe." />
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://veritas-ai-lab.pages.dev/" />
+    <meta property="og:title" content="Responsible AI Foundations Lab | Enterprise AI Platform Prototype" />
+    <meta property="og:description" content="Production-style AI systems demo showcasing model evaluation harnesses, policy guardrails, retrieval architecture, telemetry dashboards, and responsible AI governance." />
+    <meta property="og:image" content="/og-preview.png" />
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content="https://veritas-ai-lab.pages.dev/" />
+    <meta property="twitter:title" content="Responsible AI Foundations Lab | Enterprise AI Platform Prototype" />
+    <meta property="twitter:description" content="Production-style AI systems demo showcasing model evaluation harnesses, policy guardrails, retrieval architecture, telemetry dashboards, and responsible AI governance." />
+    <meta property="twitter:image" content="/og-preview.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   </head>
   <body>
     <div id="root"></div>
-    <script>
-        window.addEventListener('error', (event) => {
-          const isOurAppError = event.filename && event.filename.startsWith(window.location.origin);
-          if (isOurAppError) {
-            navigator.sendBeacon('/api/client-errors', JSON.stringify({
-              message: event.message,
-              url: window.location.href,
-              userAgent: navigator.userAgent,
-              source: event.filename,
-              lineno: event.lineno,
-              colno: event.colno,
-              stack: event.error ? event.error.stack : null,
-              timestamp: new Date().toISOString()
-            }));
-          }
-        }, true);
-    </script>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
