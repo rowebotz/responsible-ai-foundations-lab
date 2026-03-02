@@ -12,28 +12,39 @@ export const useLanguage = create<LanguageState>()(
       current: 'en',
       setLanguage: (lang) => {
         set({ current: lang });
-        document.documentElement.lang = lang;
+        if (typeof document !== 'undefined') {
+          document.documentElement.lang = lang;
+        }
       },
       toggleLanguage: () => set((state) => {
         const next = state.current === 'en' ? 'es' : 'en';
-        document.documentElement.lang = next;
+        if (typeof document !== 'undefined') {
+          document.documentElement.lang = next;
+        }
         return { current: next };
       }),
     }),
     {
       name: 'veritas-lang-preference',
+      onRehydrateStorage: () => (state) => {
+        if (state && typeof document !== 'undefined') {
+          document.documentElement.lang = state.current;
+        }
+      },
     }
   )
 );
-// Initialize lang attribute on load
+// Final safety check for initial page load before hydration
 if (typeof document !== 'undefined') {
   const saved = localStorage.getItem('veritas-lang-preference');
   if (saved) {
     try {
       const parsed = JSON.parse(saved);
-      document.documentElement.lang = parsed.state.current || 'en';
+      if (parsed?.state?.current) {
+        document.documentElement.lang = parsed.state.current;
+      }
     } catch (e) {
-      document.documentElement.lang = 'en';
+      console.warn('Failed to parse i18n preference:', e);
     }
   }
 }

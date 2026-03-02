@@ -44,11 +44,6 @@ const router = createBrowserRouter([
     errorElement: <RouteErrorBoundary />,
   },
   {
-    path: "/governance",
-    element: <><RouteAnnouncer /><GovernancePage /></>,
-    errorElement: <RouteErrorBoundary />,
-  },
-  {
     path: "/guardrails",
     element: <><RouteAnnouncer /><GuardrailsPage /></>,
     errorElement: <RouteErrorBoundary />,
@@ -61,6 +56,11 @@ const router = createBrowserRouter([
   {
     path: "/evaluation",
     element: <><RouteAnnouncer /><EvaluationPage /></>,
+    errorElement: <RouteErrorBoundary />,
+  },
+  {
+    path: "/governance",
+    element: <><RouteAnnouncer /><GovernancePage /></>,
     errorElement: <RouteErrorBoundary />,
   },
   {

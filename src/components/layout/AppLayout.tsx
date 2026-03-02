@@ -15,7 +15,12 @@ type AppLayoutProps = {
   className?: string;
   contentClassName?: string;
 };
-export function AppLayout({ children, container = false, className, contentClassName }: AppLayoutProps): JSX.Element {
+export function AppLayout({ 
+  children, 
+  container = false, 
+  className, 
+  contentClassName 
+}: AppLayoutProps): JSX.Element {
   const currentLang = useLanguage(s => s.current);
   const toggleLanguage = useLanguage(s => s.toggleLanguage);
   const t = currentLang === 'en' ? en : es;
@@ -27,26 +32,27 @@ export function AppLayout({ children, container = false, className, contentClass
       </a>
       <AppSidebar />
       <SidebarInset className={cn("flex flex-col min-h-screen bg-background", className)}>
-        <header className="sticky top-0 z-30 flex h-16 items-center gap-4 border-b bg-background/95 px-6 backdrop-blur" role="banner">
+        <header className="sticky top-0 z-30 flex h-16 items-center gap-4 border-b bg-background/95 px-4 md:px-6 backdrop-blur" role="banner">
           <SidebarTrigger aria-label="Toggle Sidebar" />
           <div className="flex items-center gap-2 font-bold text-foreground">
             <ShieldCheck className="h-5 w-5 text-primary" aria-hidden="true" />
-            <span className="tracking-tight">Veritas AI <span className="text-muted-foreground font-normal ml-1 border-l pl-2">Lab</span></span>
+            <span className="tracking-tight hidden sm:inline">Veritas AI <span className="text-muted-foreground font-normal ml-1 border-l pl-2">Lab</span></span>
+            <span className="tracking-tight sm:hidden">Veritas</span>
           </div>
           <div className="ml-auto flex items-center gap-3">
             <Button
               variant="ghost"
               size="sm"
               onClick={toggleLanguage}
-              className="text-xs font-mono h-8 gap-2"
+              className="text-xs font-mono h-8 px-2 gap-2"
               aria-label={`Switch language. Current: ${currentLang.toUpperCase()}`}
             >
               <Languages className="h-3 w-3" />
-              {currentLang.toUpperCase()}
+              <span className="hidden xs:inline">{currentLang.toUpperCase()}</span>
             </Button>
             <ThemeToggle className="relative top-0 right-0" />
             <div className="flex items-center gap-2 border-l pl-3 ml-1">
-              <div className="h-8 w-8 rounded-full bg-primary text-primary-foreground flex items-center justify-center">
+              <div className="h-8 w-8 rounded-full bg-primary text-primary-foreground flex items-center justify-center flex-shrink-0">
                 <User className="h-4 w-4" />
               </div>
               <div className="hidden lg:block text-xs">
@@ -57,13 +63,12 @@ export function AppLayout({ children, container = false, className, contentClass
           </div>
         </header>
         <main id="main-content" className={cn("flex-1 outline-none", contentClassName)} tabIndex={-1} role="main">
-          {container ? (
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-10 lg:py-12">
-              {children}
-            </div>
-          ) : (
-            children
-          )}
+          <div className={cn(
+            "w-full",
+            container ? "max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-10 lg:py-12" : "p-0"
+          )}>
+            {children}
+          </div>
         </main>
         <footer className="border-t py-8 px-6 bg-muted/20" role="contentinfo">
           <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6 text-xs text-muted-foreground">
