@@ -36,6 +36,14 @@ interface ErrorContext {
   level: "error" | "warning" | "info";
 }
 
+// Added 
+const isGitHubPages = (): boolean => {
+  if (typeof window === "undefined") return false;
+  const { hostname, pathname } = window.location;
+  return hostname.endsWith("github.io") || pathname.startsWith("/responsible-ai-foundations-lab/");
+};
+
+
 // Shared categorization utility (used by both class and immediate interceptors)
 const categorize = (message: string): ErrorReport["category"] => {
   if (message.includes("Warning:") || message.includes("React")) return "react";
@@ -723,6 +731,9 @@ const shouldReportImmediate = (context: ErrorContext): boolean => {
 };
 
 const sendImmediateError = async (payload: ImmediatePayload): Promise<void> => {
+  // GitHub Pages is static hosting; no /api backend exists
+  if (isGitHubPages()) return;
+
   try {
     await fetch("/api/client-errors", {
       method: "POST",
