@@ -1,4 +1,6 @@
-import '@/lib/errorReporter';
+if (typeof window !== "undefined" && !window.location.hostname.endsWith("github.io")) {
+  import("@/lib/errorReporter");
+}
 import { enableMapSet } from "immer";
 enableMapSet();
 import React, { StrictMode } from 'react'
