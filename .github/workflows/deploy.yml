@@ -18,18 +18,30 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
 
-      - uses: oven-sh/setup-bun@v2
-        with:
-          bun-version: "latest"
+steps:
+  - uses: actions/checkout@v4
 
-      - run: bun install
-      - run: bun run build
+  - uses: oven-sh/setup-bun@v2
+    with:
+      bun-version: "latest"
 
-      - uses: actions/upload-pages-artifact@v3
-        with:
-          path: dist
+  - run: bun install
+  - run: bun run build
+
+  - name: Debug build output
+    run: |
+      echo "PWD=$(pwd)"
+      echo "---- dist ----"
+      ls -la dist || true
+      echo "---- dist/client ----"
+      ls -la dist/client || true
+      echo "---- find index.html ----"
+      find . -maxdepth 4 -name index.html -print || true
+
+  - uses: actions/upload-pages-artifact@v3
+    with:
+      path: dist
 
   deploy:
     environment:
